@@ -1,0 +1,40 @@
+#sidebar-wrapper {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #f8f9fa;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+#sidebar-wrapper .list-group {
+    width: 100%;
+}
+
+#sidebar-wrapper .list-group-item {
+    border: none;
+    padding: 0.75rem 1rem;
+    color: #000;
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background: #e9ecef;
+    color: #000;
+}
+
+.container-fluid {
+    margin-left: 250px; /* Offset for the sidebar */
+    padding: 1rem;
+}
+
+.content {
+    margin: 2rem 0;
+}

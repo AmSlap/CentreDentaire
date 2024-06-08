@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Factures</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      width: 250px;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+    }
+    .sidebar a {
+      padding: 10px 20px;
+      display: block;
+      text-decoration: none;
+      color: #fff;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .content h1 {
+      color: #495057;
+    }
+    .content p {
+      color: #6c757d;
+    }
+    .patient-list {
+      margin-top: 20px;
+    }
+    .patient-item {
+      background-color: #fff;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .appointment-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .appointment-table th,
+    .appointment-table td {
+      border: 1px solid #dee2e6;
+      padding: 10px;
+      text-align: left;
+    }
+    .appointment-table th {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .appointment-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    .appointment-table tr:hover {
+      background-color: #e9ecef;
+    }
+    .navbar {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar .username {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar">
+  <div class="username">DR <span th:text="${user.nom}"></span></div>
+</div>
+
+<div class="sidebar">
+  <a th:href="@{/home}">Home</a>
+  <a href="/profile">Profile</a>
+  <a href="/patients">Patients</a>
+  <a th:href="@{/caisse/{id}(id=1)}">Caisse</a>
+
+  <a href="/secretaires">Personnel</a>
+  <a href="/parameters">Parameters</a>
+  <a href="/" class="logout">Deconnexion</a>
+</div>
+<div class="container">
+  <h1>Factures</h1>
+
+  <!-- Table to list all factures -->
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Montant Restant</th>
+      <th>Montant Payé</th>
+      <th>Date de Facturation</th>
+      <th>Montant Total</th>
+      <th>Type de Paiement</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="facture : ${factures}">
+      <td th:text="${facture.montantRestant}"></td>
+      <td th:text="${facture.montantPaye}"></td>
+      <td th:text="${facture.dateFacturation}"></td>
+      <td th:text="${facture.montantTotal}"></td>
+      <td th:text="${facture.typePaiement}"></td>
+      <td>
+        <a th:href="@{/facture/edit/{id}(id=${facture.idFacture})}" class="btn btn-warning btn-sm">Edit</a>
+        <a th:href="@{/facture/delete/{id}(id=${facture.idFacture})}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Button to add a new facture -->
+  <div>
+    <a th:href="@{/facture/new}" class="btn btn-primary">Add New Facture</a>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

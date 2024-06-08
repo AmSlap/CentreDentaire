@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modifier Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            width: 250px;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+            top: 0;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .content h1 {
+            margin-bottom: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="username">DR <span th:text="${user.nom}"></span></div>
+</div>
+<div class="sidebar">
+    <a th:href="@{/home}">Home</a>
+    <a href="/profile">Profile</a>
+    <a href="/patients">Patients</a>
+    <a th:href="@{/caisse/{id}(id=1)}">Caisse</a>
+
+    <a href="/secretaires">Personnel</a>
+    <a href="/parameters">Parameters</a>
+    <a href="/" class="logout">Deconnexion</a>
+</div>
+
+<div class="content">
+    <h1>Modifier Profile</h1>
+    <p>This is where you can modify your profile information.</p>
+
+    <div class="profile-header">
+        <div>
+            <img src="cama.jpg" alt="" />
+            <span>Doctor Full Name</span>
+        </div>
+    </div>
+
+    <form th:action="@{/enregisterProfile}" th:object="${user}" method="post">
+        <div class="profile-info">
+            <p><strong>Address:</strong> <input type="text" th:field="*{adresse}" class="form-control"></p>
+            <p><strong>Phone:</strong> <input type="text" th:field="*{telephone}" class="form-control"></p>
+            <p><strong>Email:</strong> <input type="text" th:field="*{email}" class="form-control"></p>
+            <p><strong>CIN:</strong> <input type="text" th:field="*{cin}" class="form-control"></p>
+            <p><strong>Sexe:</strong>
+                <select th:field="*{sexe}" class="form-control">
+                    <option th:value="Homme" th:text="Homme"></option>
+                    <option th:value="Femme" th:text="Femme"></option>
+                </select>
+            </p>
+            <p><strong>MotDePass:</strong> <input type="password" th:field="${user.motDePass}" class="form-control" ></p>
+        </div>
+
+        <div class="profile-header">
+            <div>
+                <button type="submit" class="btn btn-success">Enregister</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

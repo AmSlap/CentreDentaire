@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            width: 250px;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+            top: 0;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .content h1 {
+            color: #495057;
+        }
+
+        .content p {
+            color: #6c757d;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .username {
+            font-size: 18px;
+        }
+
+        /* Add custom styles for form */
+        form {
+            margin-top: 20px;
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        form input,
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="username">DR <span th:text="${'DR ' + user.getNom() + ' ' + user.getPrenom()}"></span></div>
+
+</div>
+
+<div class="sidebar">
+    <a th:href="@{/home}">Home</a>
+    <a href="/profile">Profile</a>
+    <a href="/patients">Patients</a>
+    <a th:href="@{/caisse/{id}(id=1)}">Caisse</a>
+    <a href="/secretaires">Personnel</a>
+    <a href="/parameters">Parameters</a>
+    <a href="/" class="logout">Deconnexion</a>
+</div>
+
+<div class="content">
+
+
+
+    <h1>ajouter patient</h1>
+
+    <form th:action="@{/patients}" method="post">
+        <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input type="text" class="form-control" id="nom" name="nom" placeholder="Enter Nom">
+        </div>
+        <div class="form-group">
+            <label for="prenom">Prenom:</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Enter Prenom">
+        </div>
+        <div class="form-group">
+            <label for="dateNaissance">Date de Naissance:</label>
+            <input type="date" class="form-control" id="dateNaissance" name="dateNaissance">
+        </div>
+        <div class="form-group">
+            <label for="sexe">Sexe:</label>
+            <input type="text" class="form-control" id="sexe" name="sexe">
+        </div>
+        <div class="form-group">
+            <label for="mutuelle">Mutuelle:</label>
+            <select class="form-control" id="mutuelle" name="mutuelle">
+                <option>CNAM</option>
+                <option>CIMR</option>
+                <option>CNOPS</option>
+                <option>CNSS</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="groupeSanguin">Groupe Sanguin:</label>
+            <select class="form-control" id="groupeSanguin" name="groupeSanguin">
+                <option>O_NEGATIF</option>
+                <option>A_POSITIF</option>
+                <option>B_NEGATIF</option>
+                <option>AB_POSITIF</option>
+                <option>AB_NEGATIF</option>
+                <option>A_NEGATIF</option>
+                <option>O_POSITIF</option>
+                <option>B_POSITIF</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="profession">Profession:</label>
+            <input type="text" class="form-control" id="profession" name="profession" placeholder="Enter Profession">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Patient</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

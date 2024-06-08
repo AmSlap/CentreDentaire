@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caisse Details</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      width: 250px;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+    }
+    .sidebar a {
+      padding: 10px 20px;
+      display: block;
+      text-decoration: none;
+      color: #fff;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .container {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .container h1 {
+      color: #495057;
+    }
+    .container p {
+      color: #6c757d;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f8f9fa;
+      color: #495057;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="username">DR <span th:text="${user.nom}"></span></div>
+</div>
+
+<div class="sidebar">
+  <a th:href="@{/home}">Home</a>
+  <a href="/profile">Profile</a>
+  <a href="/patients">Patients</a>
+  <a th:href="@{/caisse/{id}(id=1)}">Caisse</a>
+  <a href="/secretaires">Personnel</a>
+  <a href="/parameters">Parameters</a>
+  <a href="/" class="logout">Deconnexion</a>
+</div>
+
+<div class="container">
+  <h1>Caisse Details</h1>
+  <div th:if="${caisse != null}">
+    <table class="table table-striped">
+      <tbody>
+      <tr>
+        <td>Recette du Jour</td>
+        <td th:text="${caisse.recetteDuJours}"></td>
+      </tr>
+      <tr>
+        <td>Recette du Mois</td>
+        <td th:text="${caisse.recetteDuMois}"></td>
+      </tr>
+      <tr>
+        <td>Recette de l'Année</td>
+        <td th:text="${caisse.recetteDeLAnnee}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div th:if="${caisse == null}">
+    <p>Caisse not found.</p>
+  </div>
+
+  <!-- Button to redirect to factures page -->
+  <div>
+    <a th:href="@{/factures}" class="btn btn-primary">Manage Invoices</a>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

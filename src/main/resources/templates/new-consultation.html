@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>New Consultation</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar .username {
+      font-size: 18px;
+    }
+    .sidebar {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      width: 250px;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+    }
+    .sidebar a {
+      padding: 10px 20px;
+      display: block;
+      text-decoration: none;
+      color: #fff;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .content h1 {
+      color: #495057;
+    }
+    .patient-list {
+      margin-top: 20px;
+    }
+    .patient-item {
+      background-color: #fff;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .appointment-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .appointment-table th,
+    .appointment-table td {
+      border: 1px solid #dee2e6;
+      padding: 10px;
+      text-align: left;
+    }
+    .appointment-table th {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .appointment-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    .appointment-table tr:hover {
+      background-color: #e9ecef;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar">
+  <div class="username">DR <span th:text="${user.nom}"></span></div>
+</div>
+
+<div class="sidebar">
+  <a th:href="@{/home}">Home</a>
+  <a href="/profile">Profile</a>
+  <a href="/patients">Patients</a>
+  <a th:href="@{/caisse/{id}(id=1)}">Caisse</a>
+
+  <a href="/secretaires">Personnel</a>
+  <a href="/parameters">Parameters</a>
+  <a href="/" class="logout">Deconnexion</a>
+</div>
+<div class="content">
+<h1>New Consultation for Patient ID: <span th:text="${patient.id}"></span></h1>
+<form th:action="@{/consultation/save}" th:object="${consultation}" method="post">
+  <input type="hidden" th:field="*{dossierMedical.numeroDossier}" th:value="${patient.dossierMedical.getNumeroDossier()}"/>
+  <div>
+    <label for="dateConsultation">Date:</label>
+    <input type="date" id="dateConsultation" th:field="*{dateConsultation}"/>
+  </div>
+  <div>
+    <label for="typeConsultation">Type:</label>
+    <select id="typeConsultation" th:field="*{typeConsultation}">
+      <option th:each="type : ${T(com.example.CentreD.enums.TypeConsultation).values()}"
+              th:value="${type}" th:text="${type}"></option>
+    </select>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-success">Save</button>
+  </div>
+</form>
+</div>
+</body>
+</html>
